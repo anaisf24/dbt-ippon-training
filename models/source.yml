@@ -19,10 +19,10 @@ sources:
           - name: address
             tests: 
               - unique
-              - not null
+              - not_null
           - name: nb_employees
             tests: 
-              - not null
+              - not_null
 
       - name: orders
         description: liste des orders par restaurants
