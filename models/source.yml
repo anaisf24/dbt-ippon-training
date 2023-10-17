@@ -1,0 +1,42 @@
+version: 2
+
+sources:
+  - name: source # this is the source_name
+    schema: source 
+    tables:
+      - name: dishes
+      - name: fuzzy_orders
+      - name: restaurants # this is the table_name
+        description: liste des restaurants
+        columns:
+          - name: identifier
+            tests:
+              - unique
+              - not_null
+          - name: name
+            tests: 
+              - unique
+          - name: address
+            tests: 
+              - unique
+              - not null
+          - name: nb_employees
+            tests: 
+              - not null
+
+      - name: orders
+        description: liste des orders par restaurants
+        columns:
+          - name: restaurant_identifier
+            tests:
+              - unique
+              - not_null
+              - relationships:
+                  field: identifier
+                  to: ref('base_restaurants')
+          - name: payment_method
+            tests:
+              - accepted_values:
+                  values: ['cash', 'card','cheque','meal_ticket']
+
+              
